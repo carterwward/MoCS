@@ -18,12 +18,13 @@ class Cell:
 
     def __get_open_mindedness_value(self):
         """get open_mindedness value from the current self.hesitancy_state."""
+        # Hesitant
         if self.hesitancy_state == 0:
             self.open_mindedness = np.random.uniform(0.2, 0.5)
-
+        # Non-hesitant
         elif self.hesitancy_state == 1:
             self.open_mindedness = np.random.uniform(0.2, 0.5)
-
+        # Unsure
         elif self.hesitancy_state == 2:
             self.open_mindedness = np.random.uniform(0, 0.2)
 

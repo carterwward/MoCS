@@ -5,27 +5,33 @@ class Simulation:
     def __init__(self, step: float, alpha: float, beta: float, gamma: float, rho: float, rows: int, cols: int):
         self.alpha = alpha
         self.beta = beta
-        self. gamma = gamma
+        self.gamma = gamma
         self.rho = rho
         self.rows = rows
         self.cols = cols
 
+        self.rows = rows
+        self.cols = cols
+
+        # 0: Hesitant, 1: Not Hesitant, 2: Unsure
+        self.rate_map = {(0, 1): (2, alpha), (1, 0): (2, beta), (1, 2): (1 ,gamma), (0, 2): (0, rho)}
+
         grid_layout = np.random.choice(3, (rows, cols))
         self.grid = self.__map_cells(grid_layout)
         self.neighborhood_map = self.__neighborhood_map()
-        for key in self.neighborhood_map.keys():
-            print(key, self.neighborhood_map[key])
 
     def __map_cells(self, grid):
         create_cell = lambda val: Cell(val)
         vmap_cells = np.vectorize(create_cell)
+        # print(i, j)
         return vmap_cells(grid)
 
     def __neighborhood_map(self):
+        """Create neighborhood map of all neighbors up down left or right."""
         neighborhood = {}
 
         def _get_coordinate_list(i, j):
-            """gets list of lower, higher, left, and right cell."""
+            """Gets list of lower, higher, left, and right cell."""
             if i == 0  and j == 0:
                 return [(i, j+1), (i+1, j)]
             elif i == 0 and j == self.cols - 1:
@@ -54,8 +60,26 @@ class Simulation:
 
 
     def __update_cell(self, i, j):
-        coords = self.get_coordinate_list(i, j)
-        return 1 + i + j
+        coordinate_lst = self.get_coordinate_list(i, j)
+        print(i, j, coordinate_lst)
+
+        cell = self.grid[i, j]
+
+        sum_array = np.zeros(3)
+        cell_hs = cell.hesitancy_state
+        for c in coordinate_lst:
+            c_hs = self.grid[c[0], c[1]].hesitancy_state
+            if c_hs == cell_hs:
+                continue
+
+            rate_key = (c_hs, cell_hs)
+            if rate_key not in self.rate_map.keys():
+                continue
+
+            sum_state, val = self.rate_map[rate_key]
+
+        max_index = sum_array.argmax()
+        cell.update(max_index, sum_array[max_index])
 
     def step(self):
         vupdate_cell = np.vectorize(self.__update_cell)
