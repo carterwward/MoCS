@@ -53,15 +53,13 @@ class Simulation:
 
         for i in range(self.rows):
             for j in range(self.cols):
-                # print(i, j)
                 neighborhood[(i, j)] = _get_coordinate_list(i, j)
 
         return neighborhood
 
 
     def __update_cell(self, i, j):
-        coordinate_lst = self.get_coordinate_list(i, j)
-        print(i, j, coordinate_lst)
+        coordinate_lst = self.neighborhood_map[(i, j)]
 
         cell = self.grid[i, j]
 
@@ -82,16 +80,12 @@ class Simulation:
         max_index = sum_array.argmax()
         cell.update(max_index, sum_array[max_index])
 
-        
+        return cell
 
     def step(self):
         vupdate_cell = np.vectorize(self.__update_cell)
         copy_grid = np.fromfunction(vupdate_cell, self.grid.shape)
         self.grid = copy_grid
 
-
-    def update_grid(self):
-        pass
-
-s = Simulation(10, 10, 10, 10, 10, 3, 3)
-
+s = Simulation(10, 10, 10, 10, 10, 2, 2)
+s.step()
