@@ -48,3 +48,14 @@ class Cell:
             self.get_open_mindedness_value()
 
         self.open_mindedness_noise()
+
+    @property
+    def color(self):
+        if self.hesitancy_state == HesitancyState.HESITANT:
+            return (255, 0, 0)  # red
+
+        elif self.hesitancy_state == HesitancyState.NOT_HESITANT:
+            return (0, 128, 0)  # green
+
+        elif self.hesitancy_state == HesitancyState.UNSURE:
+            return (255, 255, 255)  # white
