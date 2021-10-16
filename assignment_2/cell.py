@@ -8,7 +8,7 @@ class Cell:
         """Initialize instance of Cell class, representing a person with a given HesitancyState.
 
         Args:
-            hesitancy_state (HesitancyState): initial HesitancyState of person
+            hesitancy_state (int): initial hesitancy state of person
             row (int): row in grid
             column (int): column in grid
         """
