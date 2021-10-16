@@ -69,16 +69,18 @@ class Simulation:
                 continue
 
             sum_state, val = self.rate_map[rate_key]
+            sum_array[sum_state] += val
 
         max_index = sum_array.argmax()
         cell.update(max_index, sum_array[max_index])
+
+        
 
     def step(self):
         vupdate_cell = np.vectorize(self.__update_cell)
         copy_grid = np.fromfunction(vupdate_cell, self.grid.shape)
         self.grid = copy_grid
         print(self.grid)
-
 
 
     def update_grid(self):
