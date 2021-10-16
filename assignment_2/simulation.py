@@ -1,8 +1,10 @@
 """Simulation File for Handling a Grid and Running a Simulation"""
 import numpy as np
 from cell import Cell
+
 class Simulation:
-    def __init__(self, step: float, alpha: float, beta: float, gamma: float, rho: float, rows: int, cols: int):
+    def __init__(self, alpha: float, beta: float, gamma: float, rho: float, rows: int, cols: int):
+        # np.random.seed(1)
         self.alpha = alpha
         self.beta = beta
         self.gamma = gamma
@@ -59,14 +61,23 @@ class Simulation:
 
 
     def __update_cell(self, i, j):
+        i = int(i)
+        j = int(j)
         coordinate_lst = self.neighborhood_map[(i, j)]
-
         cell = self.grid[i, j]
+        if i == 1 and j == 1:
+            print("THE CELL WE CARE ABOUT")
 
         sum_array = np.zeros(3)
         cell_hs = cell.hesitancy_state
+        if i == 1 and j == 1:
+            print("HES STATE", cell_hs)
+        if i == 1 and j == 1:
+            print("SURROUNDING CELLS")
         for c in coordinate_lst:
             c_hs = self.grid[c[0], c[1]].hesitancy_state
+            if i == 1 and j == 1:
+                print("coord", c, "hesitancy status",c_hs)
             if c_hs == cell_hs:
                 continue
 
@@ -76,9 +87,12 @@ class Simulation:
 
             sum_state, val = self.rate_map[rate_key]
             sum_array[sum_state] += val
-
+        if i == 1 and j == 1:
+            print("SUM ARRAY:", sum_array)
         max_index = sum_array.argmax()
         cell.update(max_index, sum_array[max_index])
+        if i == 1 and j == 1:
+            print("NEW STATUS:", cell.hesitancy_state)
 
         return cell
 
@@ -87,5 +101,7 @@ class Simulation:
         copy_grid = np.fromfunction(vupdate_cell, self.grid.shape)
         self.grid = copy_grid
 
-s = Simulation(10, 10, 10, 10, 10, 2, 2)
-s.step()
+s = Simulation(0.1, 0.1, 0.1, 0.1, 3, 3)
+for i in range(1):
+    s.step()
+    print("\n")

@@ -17,28 +17,29 @@ class Cell:
         self.__get_open_mindedness_value()  # dependent on self.open_mindedness
 
     def __get_open_mindedness_value(self):
+        # TODO: Idea to make O.P. a function of similar mindedness around them (specifically for N and H)
         """get open_mindedness value from the current self.hesitancy_state."""
         # Hesitant
         if self.hesitancy_state == 0:
-            self.open_mindedness = np.random.uniform(0.2, 0.5)
+            self.open_mindedness = 0.2 # np.random.uniform(0.2, 0.5)
         # Non-hesitant
         elif self.hesitancy_state == 1:
-            self.open_mindedness = np.random.uniform(0.2, 0.5)
+            self.open_mindedness = 0.2 # np.random.uniform(0.2, 0.5)
         # Unsure
         elif self.hesitancy_state == 2:
-            self.open_mindedness = np.random.uniform(0, 0.2)
+            self.open_mindedness = 0.2 # np.random.uniform(0, 0.2)
 
-    def __open_mindedness_noise(self):
-        """Random noise for open_mindedness state."""
-        self.open_mindedness += np.random.uniform(-0.2, 0.2)
+    # def __open_mindedness_noise(self):
+    #     """Random noise for open_mindedness state."""
+    #     self.open_mindedness += np.random.uniform(-0.2, 0.2)
 
     def update(self, max_state_in_neighborhood: int, new_state_influence: float):
         """Update the cell based on value calculated from it's neighbords in simulation.py"""
-        if new_state_influence > self.open_mindedness:
+        if new_state_influence >= self.open_mindedness:
             self.hesitancy_state = max_state_in_neighborhood
             self.__get_open_mindedness_value()
 
-        self.__open_mindedness_noise()
+        # self.__open_mindedness_noise()
 
     @property
     def color(self):
