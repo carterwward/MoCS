@@ -15,9 +15,9 @@ class Cell:
         self.hesitancy_state = hesitancy_state
         self.open_mindedness = None
 
-        self.get_open_mindedness_value()  # dependent on self.open_mindedness
+        self.__get_open_mindedness_value()  # dependent on self.open_mindedness
 
-    def get_open_mindedness_value(self):
+    def __get_open_mindedness_value(self):
         """get open_mindedness value from the current self.hesitancy_state."""
         if self.hesitancy_state == 0:
             self.open_mindedness = np.random.uniform(0.2, 0.5)
@@ -28,7 +28,7 @@ class Cell:
         elif self.hesitancy_state == 2:
             self.open_mindedness = np.random.uniform(0, 0.2)
 
-    def open_mindedness_noise(self):
+    def __open_mindedness_noise(self):
         """Random noise for open_mindedness state."""
         self.open_mindedness += np.random.uniform(-0.2, 0.2)
 
@@ -36,9 +36,9 @@ class Cell:
         """Update the cell based on value calculated from it's neighbords in simulation.py"""
         if new_state_influence > self.open_mindedness:
             self.hesitancy_state = max_state_in_neighborhood
-            self.get_open_mindedness_value()
+            self.__get_open_mindedness_value()
 
-        self.open_mindedness_noise()
+        self.__open_mindedness_noise()
 
     @property
     def color(self):
