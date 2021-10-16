@@ -1,5 +1,4 @@
 """Cell Class for Vaccine Hesitancy Model"""
-from typing import Union
 import numpy as np
 
 

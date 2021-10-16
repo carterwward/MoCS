@@ -16,10 +16,20 @@ class Simulation:
         vmap_cells = np.vectorize(create_cell)
         return vmap_cells(grid)
 
-    def step(self):
+    def __update_cell(self, i, j):
+        print(i + j)
         pass
+
+    def step(self):
+        vupdate_cell = np.vectorize(self.__update_cell)
+        copy_grid = np.fromfunction(vupdate_cell, self.grid.shape)
+        self.grid = copy_grid
+
+
 
     def update_grid(self):
         pass
 
-s = Simulation(10, 10, 10, 10, 10, 5, 5)
+s = Simulation(10, 10, 10, 10, 10, 2, 2)
+
+s.step()
