@@ -51,6 +51,11 @@ class Cell:
 
     @property
     def color(self):
+        """Get the color of a cell for visualization.
+
+        Returns:
+            tuple: (r, g, b) tuple determined by the self.hesitancy_state
+        """
         if self.hesitancy_state == HesitancyState.HESITANT:
             return (255, 0, 0)  # red
 
