@@ -40,6 +40,10 @@ class Simulation:
         unique, counts = np.unique(num_grid, return_counts=True)
         val_counts = dict(zip(unique, counts))
 
+        for i in range(3):
+            if i not in val_counts.keys():
+                val_counts[i] = 0
+
         self.data_matrix[self.iteration, :] = np.array([val_counts[0], val_counts[1], val_counts[2]])
         self.iteration += 1
 
