@@ -35,23 +35,23 @@ class Simulation:
         def _get_coordinate_list(i, j):
             """Gets list of lower, higher, left, and right cell."""
             if i == 0  and j == 0:
-                return [(i, j+1), (i+1, j)]
+                return [(i, j+1), (i+1, j), (i+1,j+1)]
             elif i == 0 and j == self.cols - 1:
-                return [(i, j-1), (i+1, j)]
+                return [(i, j-1), (i+1, j), (i+1, j-1)]
             elif i == self.rows - 1 and j == 0:
-                return [(i-1, j), (i, j+1)]
+                return [(i-1, j), (i, j+1), (i-1, j+1)]
             elif i == self.rows - 1 and j == self.cols - 1:
-                return [(i, j-1), (1-1, j)]
+                return [(i, j-1), (i-1, j), (i-1,j-1)]
             elif i == 0:
-                return [(i+1, j), (i, j-1), (i, j+1)]
+                return [(i+1, j), (i, j-1), (i, j+1), (i+1, j+1), (i+1, j-1)]
             elif i == self.rows - 1:
-                return [(i-1, j), (i, j-1), (i, j+1)]
+                return [(i-1, j), (i, j-1), (i, j+1), (i-1, j+1), (i-1, j-1)]
             elif j == 0:
-                return [(i, j+1), (i-1, j), (i+1, j)]
+                return [(i, j+1), (i-1, j), (i+1, j), (i-1, j+1), (i+1, j+1)]
             elif j == self.cols - 1:
-                return [(i, j-1), (i-1, j), (i+1, j)]
+                return [(i, j-1), (i-1, j), (i+1, j), (i-1, j-1), (i+1, j-1)]
             else:
-                return [(i, j-1), (i, j+1), (i+1, j), (i-1, j)]
+                return [(i, j-1), (i, j+1), (i+1, j), (i-1, j), (i+1, j+1), (i+1, j-1), (i-1, j-1), (i-1, j+1)]
 
         for i in range(self.rows):
             for j in range(self.cols):

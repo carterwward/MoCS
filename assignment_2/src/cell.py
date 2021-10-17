@@ -21,13 +21,13 @@ class Cell:
         """get open_mindedness value from the current self.hesitancy_state."""
         # Hesitant
         if self.hesitancy_state == 0:
-            self.open_mindedness = 0.2 # np.random.uniform(0.2, 0.5)
+            self.open_mindedness = 0.4 # np.random.uniform(0.2, 0.5)
         # Non-hesitant
         elif self.hesitancy_state == 1:
-            self.open_mindedness = 0.2 # np.random.uniform(0.2, 0.5)
+            self.open_mindedness = 0.4 # np.random.uniform(0.2, 0.5)
         # Unsure
         elif self.hesitancy_state == 2:
-            self.open_mindedness = 0.2 # np.random.uniform(0, 0.2)
+            self.open_mindedness = 0.4 # np.random.uniform(0, 0.2)
 
     # def __open_mindedness_noise(self):
     #     """Random noise for open_mindedness state."""
