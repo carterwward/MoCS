@@ -65,19 +65,21 @@ class Simulation:
         j = int(j)
         coordinate_lst = self.neighborhood_map[(i, j)]
         cell = self.grid[i, j]
-        if i == 1 and j == 1:
-            print("THE CELL WE CARE ABOUT")
+        # important_row = 1
+        # important_col = 1
+        # if i == important_row and j == important_col:
+        #     print("THE CELL WE CARE ABOUT")
 
         sum_array = np.zeros(3)
         cell_hs = cell.hesitancy_state
-        if i == 1 and j == 1:
-            print("HES STATE", cell_hs)
-        if i == 1 and j == 1:
-            print("SURROUNDING CELLS")
+        # if i == important_row and j == important_col:
+        #     print("HES STATE", cell_hs)
+        # if i == important_row and j == important_col:
+        #     print("SURROUNDING CELLS")
         for c in coordinate_lst:
             c_hs = self.grid[c[0], c[1]].hesitancy_state
-            if i == 1 and j == 1:
-                print("coord", c, "hesitancy status",c_hs)
+            # if i == important_row and j == important_col:
+            #     print("coord", c, "hesitancy status",c_hs)
             if c_hs == cell_hs:
                 continue
 
@@ -87,12 +89,12 @@ class Simulation:
 
             sum_state, val = self.rate_map[rate_key]
             sum_array[sum_state] += val
-        if i == 1 and j == 1:
-            print("SUM ARRAY:", sum_array)
+        # if i == important_row and j == important_col:
+        #     print("SUM ARRAY:", sum_array)
         max_index = sum_array.argmax()
         cell.update(max_index, sum_array[max_index])
-        if i == 1 and j == 1:
-            print("NEW STATUS:", cell.hesitancy_state)
+        # if i == important_row and j == important_col:
+        #     print("NEW STATUS:", cell.hesitancy_state)
 
         return cell
 
@@ -101,7 +103,7 @@ class Simulation:
         copy_grid = np.fromfunction(vupdate_cell, self.grid.shape)
         self.grid = copy_grid
 
-s = Simulation(0.1, 0.1, 0.1, 0.1, 3, 3)
-for i in range(1):
-    s.step()
-    print("\n")
+# s = Simulation(0.1, 0.1, 0.1, 0.1, 3, 3)
+# for i in range(1):
+#     s.step()
+#     print("\n")
