@@ -55,4 +55,4 @@ class Cell:
             return (0, 128, 0)  # green
 
         elif self.hesitancy_state == 2:
-            return (255, 255, 255)  # white
+            return (0, 0, 255)  # blue

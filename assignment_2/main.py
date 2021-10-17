@@ -48,19 +48,17 @@ def viz(sim):
     CLOCK = pygame.time.Clock()
     SCREEN.fill(BLACK)
 
-    steps_taken = 0
-    while steps_taken < 50:
+    while sim.iteration < sim.steps:
         sim.step()
-        draw(sim, steps_taken)
+        draw(sim, sim.iteration)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
         pygame.display.update()
-        if steps_taken % skip == 0:
-            screenshot(SCREEN, path, steps_taken)
-            stills.append(os.path.join(path, "step" + str(steps_taken) + ".png"))
-        steps_taken += 1
+        if sim.iteration % skip == 0:
+            screenshot(SCREEN, path, sim.iteration)
+            stills.append(os.path.join(path, "step" + str(sim.iteration) + ".png"))
         # sleep(1)
 
     img, *imgs = [Image.open(f) for f in stills]
@@ -71,5 +69,6 @@ def viz(sim):
 
 
 if __name__ == '__main__':
-    sim = Simulation(0.1, 0.1, 0.1, 0.1, 25, 25)
+    sim = Simulation(0.1, 0.1, 0.1, 0.1, 25, 25, 100)
     viz(sim)
+    sim.graph_counts()
