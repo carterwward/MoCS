@@ -1,6 +1,6 @@
 """Simulation File for Handling a Grid and Running a Simulation"""
 import numpy as np
-from cell import Cell
+from src.cell import Cell
 
 class Simulation:
     def __init__(self, alpha: float, beta: float, gamma: float, rho: float, rows: int, cols: int):

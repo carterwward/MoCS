@@ -4,7 +4,7 @@ from pygame.rect import *
 from PIL import Image
 import sys
 from time import sleep
-from simulation import Simulation
+from src.simulation import Simulation
 
 
 SCREEN, CLOCK = None, None
@@ -44,10 +44,10 @@ def viz(sim):
                 sys.exit()
         pygame.display.update()
         steps_taken += 1
-        sleep(1)
+        sleep(0.5)
 
 
 
 if __name__ == '__main__':
-    sim = Simulation(0.1, 0.1, 0.1, 0.1, 10, 10)
+    sim = Simulation(0.05, 0.05, 0.05, 0.05, 100, 100)
     viz(sim)
