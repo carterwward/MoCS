@@ -60,15 +60,14 @@ def viz(sim):
             screenshot(SCREEN, path, sim.iteration)
             stills.append(os.path.join(path, "step" + str(sim.iteration) + ".png"))
         # sleep(1)
-
     img, *imgs = [Image.open(f) for f in stills]
     img.save(fp=os.path.join("assignment_2", "img", str(time())+".gif"), format='gif', append_images=imgs, save_all=True, duration=100, loop=0)
     for im in stills:
         os.remove(im)
     os.rmdir(path)
 
-
+# alpha, beta, gamma, rho
 if __name__ == '__main__':
-    sim = Simulation(0.1, 0.1, 0.1, 0.1, 25, 25, 100)
+    sim = Simulation(0.08, 0.08, 0.035, 0.035, 25, 25, 100)
     viz(sim)
     sim.graph_counts()
