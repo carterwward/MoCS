@@ -130,5 +130,5 @@ dmypy.json
 
 
 *.code-workspace
-*assignment_2/img
-*assignment_2/graphs
+*assignment_2/question_1/img
+*assignment_2/question_1/graphs
